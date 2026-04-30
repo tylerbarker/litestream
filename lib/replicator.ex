@@ -20,9 +20,10 @@ defprotocol Litestream.Replicator do
   def cli_args(struct, database)
 
   @doc """
-  If the strategy requires a temporary file for it's configuration, this function
-  will provide the
+  If the strategy requires a temporary file for its configuration, this function
+  will provide the contents of that file as a string. If no temporary file is
+  required, this function should return `nil`.
   """
-  @spec temp_file_contents(struct :: t(), database :: String.t()) :: temp_file_contents :: String.t()
+  @spec temp_file_contents(struct :: t(), database :: String.t()) :: String.t() | nil
   def temp_file_contents(struct, database)
 end
