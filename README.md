@@ -71,7 +71,7 @@ Checkout my [GitHub Sponsorship page](https://github.com/sponsors/akoutmos) if y
 
 ## Setting Up Litestream
 
-After adding `{:litestream, "~> 0.4.0"}` in your `mix.exs` file and running `mix deps.get`, open your `application.ex`
+After adding `{:litestream, "~> 0.5.0"}` in your `mix.exs` file and running `mix deps.get`, open your `application.ex`
 file and add the following to your supervision tree:
 
 ```elixir
