@@ -42,6 +42,13 @@ def deps do
 end
 ```
 
+**Note:** On first start, the Litestream binary is downloaded and written to `priv/litestream/`
+inside your application. This path should be added to your `.gitignore` to avoid accidentally
+committing a platform-specific binary that may be incompatible with your deployment target:
+```
+/priv/litestream/
+```
+
 Documentation can be found at [hexdocs.pm/litestream](https://hexdocs.pm/litestream).
 
 ## Supporting Litestream
