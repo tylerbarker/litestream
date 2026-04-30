@@ -154,6 +154,10 @@ end
 
 Find the required fields for a strategy under its module definition at [hexdocs.pm/litestream](https://hexdocs.pm/litestream).
 
+### On Container Deployments
+
+In minimal container environments the `SHELL` environment variable is often unset. This is required by `erlexec` which handles the Litestream process, so the library detects this and defaults SHELL to `/bin/sh` automatically — if you see a warning in your logs about it, that is expected and safe to ignore.
+
 ## Attribution
 
 - The logo for the project is an edited version of an SVG image from the [unDraw project](https://undraw.co/)

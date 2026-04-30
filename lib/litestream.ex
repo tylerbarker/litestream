@@ -81,6 +81,7 @@ defmodule Litestream do
 
   @impl true
   def init(state) do
+    ensure_shell_set_for_erlexec()
     repo_config = state.repo.config()
     otp_app = Keyword.fetch!(repo_config, :otp_app)
     database_file = Keyword.fetch!(repo_config, :database)
@@ -250,6 +251,16 @@ defmodule Litestream do
         temp_path = Path.join(System.tmp_dir!(), "litestream-#{:erlang.unique_integer([:positive])}.yml")
         File.write!(temp_path, file_contents)
         Map.put(strategy, :temp_config_path, temp_path)
+    end
+  end
+
+  # erlexec checks for SHELL at startup and exits if it's absent
+  defp ensure_shell_set_for_erlexec do
+    sh = System.get_env("SHELL")
+
+    if sh == nil || sh == "" do
+      System.put_env("SHELL", "/bin/sh")
+      Logger.warning("SHELL environment variable not set; defaulting to /bin/sh for erlexec compatibility")
     end
   end
 end
