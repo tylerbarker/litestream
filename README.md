@@ -111,10 +111,7 @@ config :my_app, Litestream,
 ```
 
 With those in place, you should be all set to go! As soon as your application starts, your database will be
-automatically synced with your remote destination.
-
-> **Note:** `Litestream.Strategy.LocalFile` is suitable for development and testing only. For production
-> deployments you should use one of the cloud-backed strategies listed below.
+automatically synced using your chosen backup strategy.
 
 ### Backup Strategies
 
