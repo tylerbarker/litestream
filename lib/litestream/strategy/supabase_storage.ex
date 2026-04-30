@@ -1,7 +1,7 @@
 defmodule Litestream.Strategy.SupabaseStorage do
   @moduledoc """
   Use this strategy for backing up your SQLite DB file to
-  Suprabase Storage.
+  Supabase Storage.
   """
 
   alias __MODULE__
