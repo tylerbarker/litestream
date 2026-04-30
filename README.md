@@ -106,6 +106,50 @@ config :my_app, Litestream,
 With those in place, you should be all set to go! As soon as your application starts, your database will be
 automatically synced with your remote destination.
 
+> **Note:** `Litestream.Strategy.LocalFile` is suitable for development and testing only. For production
+> deployments you should use one of the cloud-backed strategies listed below.
+
+### Backup Strategies
+
+The following strategies are available under the `Litestream.Strategy` namespace for configuration in `runtime.exs`:
+
+| Strategy | Destination |
+|---|---|
+| `LocalFile` | Local filesystem (development/testing only) |
+| `ObjectStorage` | Any S3-compatible store (AWS S3, etc.) |
+| `AzureBlobStorage` | Azure Blob Storage |
+| `BackblazeB2` | Backblaze B2 |
+| `CloudflareR2` | Cloudflare R2 |
+| `DigitalOceanSpaces` | DigitalOcean Spaces |
+| `Firebase` | Firebase Storage |
+| `GoogleCloudStorage` | Google Cloud Storage |
+| `LinodeObjectStorage` | Linode Object Storage |
+| `Minio` | MinIO |
+| `NatsJetstream` | NATS JetStream Object Store |
+| `ScalewayObjectStorage` | Scaleway Object Storage |
+| `SFTP` | SFTP server |
+| `SupabaseStorage` | Supabase Storage |
+| `Tigris` | Tigris |
+| `Custom` | BYO Litestream YAML config file |
+
+For example, to back up to an S3-compatible store in production:
+
+```elixir
+if config_env() == :prod do
+# ... #
+config :my_app, Litestream,
+  repo: MyApp.Repo,
+  strategy: %Litestream.Strategy.ObjectStorage{
+    access_key_id: System.fetch_env!("AWS_ACCESS_KEY_ID"),
+    secret_access_key: System.fetch_env!("AWS_SECRET_ACCESS_KEY"),
+    url: System.fetch_env!("LITESTREAM_REPLICA_URL")
+  }
+# ... #
+end
+```
+
+Find the required fields for a strategy under its module definition at [hexdocs.pm/litestream](https://hexdocs.pm/litestream).
+
 ## Attribution
 
 - The logo for the project is an edited version of an SVG image from the [unDraw project](https://undraw.co/)
